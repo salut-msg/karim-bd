@@ -11,7 +11,8 @@
         font-size: 36px;
       }
       html,
-      body {
+      body,
+      main {
         height: 100%;
         width: 100%;
         padding: 0;
@@ -20,6 +21,7 @@
       main {
         background: #000080;
         color: #fff;
+        padding: 30px;
       }
       .inp {
         display: inline-block;
@@ -42,7 +44,7 @@
   </head>
   <body>
     <main>
-      <div style="color: #ff0; padding: 30px 0;"><span style="font-size: 72px;">&bull;</span><span id=coin></span></div>
+      <div style="color: #ff0; padding: 0 0 0 30px;"><span style="font-size: 72px;">&bull;</span><span id=coin></span></div>
       <p>Введите код: <input type="text" id="inp" class="inp"><button onclick="checkCode();">ОК</button></p>
       <script>
         const ME = {{ username }};
