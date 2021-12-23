@@ -25,16 +25,23 @@
     <script>
       setInterval(function () {
           var httpRequest = new XMLHttpRequest();
-          var m = document.getElementById("pl");
+          var pl = document.getElementById("pl");
           httpRequest.overrideMimeType('text/plain');
           httpRequest.onreadystatechange = function() {
             if (httpRequest.readyState == 4) {
-              m.innerHtml = httpRequest.responseText;
+              pl.innerHtml = httpRequest.responseText;
             }
           }
           httpRequest.open('GET', '/api/list', true);
           httpRequest.send(null);
         }, 100);
+      function r(m) {
+          var httpRequest = new XMLHttpRequest();
+          httpRequest.overrideMimeType('text/plain');
+          httpRequest.onreadystatechange = function() {};
+          httpRequest.open('GET', '/api/' + m, true);
+          httpRequest.send(null);
+        }
     </script>
   </body>
 </html>
