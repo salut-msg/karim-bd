@@ -9,6 +9,7 @@
         color: #fff;
         font-family: Rubik, sans-serif;
         font-size: 36px;
+        box-sizing: border-box;
       }
       html,
       body,
@@ -46,10 +47,22 @@
   </head>
   <body>
     <main>
-      <div style="color: #ff0; padding: 0 0 0 30px;"><span style="font-size: 72px; color: #ff0;">&bull;</span><span id=coin></span></div>
+      <div style="color: #ff0; padding: 0 0 0 30px;"><span style="font-size: 72px; color: #ff0;">&bull;</span><span id=coin style="color: #ff0;"></span></div>
       <p>Введите код: <input type="text" id="inp" class="inp"><button onclick="checkCode();">ОК</button></p>
       <script>
         const ME = {{ username }};
+        setInterval(function () {
+          var httpRequest = new XMLHttpRequest();
+          var m = document.getElementById("inp");
+          httpRequest.overrideMimeType('text/plain');
+          httpRequest.onreadystatechange = function() {
+            if (httpRequest.readyState == 4) {
+              m.innerHtml = httpRequest.responseText;
+            }
+          }
+          httpRequest.open('GET', '/api/coins?uname=' + ME, true);
+          httpRequest.send(null);
+        }, 100);
         function checkCode() {
           var httpRequest = new XMLHttpRequest();
           var code = document.getElementById("inp");
@@ -65,6 +78,7 @@
             }
           }
           httpRequest.open('GET', '/api/check?username=' + ME + '&code=' + code.value, true);
+          httpRequest.send(null);
         }
       </script>
     </main>
