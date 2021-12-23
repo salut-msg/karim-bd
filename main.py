@@ -6,7 +6,7 @@ app.secret_key = os.urandom(128)
 players = {
     "@Roma": 0,
     "@Rayan": 0,
-    # TODO:  Тех, кто не админы, очень мало. Будет скучно :(
+    "@Timur": 0
 }
 pg.init()
 player = pg.mixer.Channel(0)
@@ -38,9 +38,10 @@ CHEAT431
 GETTER87
 DEVELOP2
 PROGRAM3
-"""
+""".strip().split()
 used = []
 state = 0
+music = pg.mixer.Sound("bg.wav")
 
 
 @app.route("/admpass.html")
