@@ -21,5 +21,20 @@
   <body>
     <button onclick="r('start');">START</button>
     <button onclick="r('stop');">STOP</button>
+    <div id="pl"></div>
+    <script>
+      setInterval(function () {
+          var httpRequest = new XMLHttpRequest();
+          var m = document.getElementById("pl");
+          httpRequest.overrideMimeType('text/plain');
+          httpRequest.onreadystatechange = function() {
+            if (httpRequest.readyState == 4) {
+              m.innerHtml = httpRequest.responseText;
+            }
+          }
+          httpRequest.open('GET', '/api/list', true);
+          httpRequest.send(null);
+        }, 100);
+    </script>
   </body>
 </html>
