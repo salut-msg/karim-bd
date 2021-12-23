@@ -16,18 +16,52 @@
         width: 100%;
         padding: 0;
         margin: 0;
-        background: linear-gradient(
-                        to bottom right,
-                        #0000ff,
-                        #8000ff,
-                        #ff00ff
-                    );
+      }
+      main {
+        background: #000080;
+        color: #fff;
+      }
+      .inp {
+        display: inline-block;
+        color: #fff;
+        border: 5px solid #fff;
+        border-radius: 4px;
+        padding: 10px 28px;
+        text-align: center;
+      }
+      button {
+        display: inline-block;
+        color: #fff;
+        border: 5px solid #fff;
+        border-radius: 4px;
+        padding: 10px 28px;
+        text-align: center;
+        cursor: pointer;
       }
     </style>
   </head>
   <body>
     <main>
-
+      <div style="color: #ff0; padding: 30px 0;"><span style="font-size: 72px;">&bull;</span><span id=coin></span></div>
+      <p>Введите код: <input type="text" id="inp" class="inp"><button onclick="checkCode();">ОК</button></p>
+      <script>
+        const ME = {{ username }};
+        function checkCode() {
+          var httpRequest = new XMLHttpRequest();
+          var code = document.getElementById("inp");
+          httpRequest.overrideMimeType('text/plain');
+          httpRequest.onreadystatechange = function() {
+            if (httpRequest.readyState == 4) {
+              if (http.responseText.trim() == "YES") {
+                code.style.borderColor = "#0f0";
+              } else {
+                code.style.borderColor = "#f00";
+              }
+              setInterval(function() {code.style.borderColor = "#fff";}, 2000);
+            }
+          }
+          httpRequest.open('GET', '/api/check?username=' + ME + '&code=' + code.value, true);
+      </script>
     </main>
   </body>
 </html>
