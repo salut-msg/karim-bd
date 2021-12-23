@@ -40,7 +40,7 @@ DEVELOP2
 PROGRAM3
 """
 used = []
-state = []
+state = 0
 
 
 @app.route("/admpass.html")
@@ -86,15 +86,33 @@ def login():
         return render_template("nosuch.html", username=uname)
 
 
-@app.route("/api-check")
+@app.route("/api/<act>")
+def do_action(act):
+    global state
+    if act == "check":
+        return api_check()
+    if act == "start":
+        music.play(-1)
+        state = 1
+    if act == "stop":
+        music.stop()
+        state = 0
+    if act == "state":
+        return str(state)
+    return "OK"
+
+
 def api_check():
     code = request.args.get("code")
+    uname = request.args.get("uname")
     if code == "BESTCODE":
+        players[uname] += 60
         return "YES"
     elif code in used:
         return "NON"
     elif code in codes:
         used.append(code)
+        players[uname] += sum(os.urandom(24)) % 20 + 1
         return "YES"
 
 app.run(host="0.0.0.0", port=8000)
