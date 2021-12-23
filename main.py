@@ -98,8 +98,14 @@ def do_action(act):
     if act == "stop":
         music.stop()
         state = 0
-    if act == "state":
-        return str(state)
+    if act == "list":
+        res = ""
+        for i in players:
+            res += i
+            res += ": "
+            res += str(players[i])
+            res += "<br>"
+        return res
     return "OK"
 
 
