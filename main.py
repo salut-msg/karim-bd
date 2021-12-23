@@ -71,7 +71,7 @@ def index():
         return render_template("admin-ui.html")
     if "username" not in session or session["username"] not in players:
         return render_template("login.html", **state)
-    return render_template("game.html")
+    return render_template("game.html", username=session["username"])
 
 
 @app.route("/login/")
@@ -84,7 +84,7 @@ def login():
         session.modified = True
         return redirect("/")
     else:
-        return render_template("nosuch.html", username=uname)
+        return render_template("nosuch.html")
 
 
 @app.route("/api/<act>")
