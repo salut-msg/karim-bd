@@ -16,11 +16,16 @@
         padding: 0;
         margin: 0;
       }
+      button {
+        padding: 10px 28px;
+        display: inline-block;
+      }
     </style>
   </head>
   <body>
     <button onclick="r('start');">START</button>
     <button onclick="r('stop');">STOP</button>
+    <button onclick="r('alert');">ALERT</button>
     <div id="pl"></div>
     <script>
       setInterval(function () {
@@ -29,7 +34,7 @@
           httpRequest.overrideMimeType('text/plain');
           httpRequest.onreadystatechange = function() {
             if (httpRequest.readyState == 4) {
-              pl.innerHtml = httpRequest.responseText;
+              pl.innerHTML = httpRequest.responseText;
             }
           }
           httpRequest.open('GET', '/api/list', true);

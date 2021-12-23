@@ -50,34 +50,35 @@
       <div style="color: #ff0; padding: 0 0 0 30px;"><span style="font-size: 72px; color: #ff0;">&bull;</span><span id=coin style="color: #ff0;"></span></div>
       <p>Введите код: <input type="text" id="inp" class="inp"><button onclick="checkCode();">ОК</button></p>
       <script>
-        const ME = {{ username }};
+        const ME = "{{ username }}";
         setInterval(function () {
           var httpRequest = new XMLHttpRequest();
-          var m = document.getElementById("inp");
           httpRequest.overrideMimeType('text/plain');
           httpRequest.onreadystatechange = function() {
             if (httpRequest.readyState == 4) {
-              m.innerHtml = httpRequest.responseText;
+              var m = document.getElementById("coin");
+              m.innerHTML = httpRequest.responseText;
             }
           }
           httpRequest.open('GET', '/api/coins?uname=' + ME, true);
           httpRequest.send(null);
         }, 100);
         function checkCode() {
-          var httpRequest = new XMLHttpRequest();
           var code = document.getElementById("inp");
+          var httpRequest = new XMLHttpRequest();
           httpRequest.overrideMimeType('text/plain');
           httpRequest.onreadystatechange = function() {
             if (httpRequest.readyState == 4) {
-              if (http.responseText.trim() == "YES") {
+              if (httpRequest.responseText.trim() == "YES") {
                 code.style.borderColor = "#0f0";
               } else {
                 code.style.borderColor = "#f00";
               }
-              setInterval(function() {code.style.borderColor = "#fff";}, 2000);
+              setTimeout(function() {code.style.borderColor = "#fff";}, 2000);
             }
           }
-          httpRequest.open('GET', '/api/check?username=' + ME + '&code=' + code.value, true);
+          httpRequest.open('GET', '/api/check?uname=' + ME + '&code=' + code.value, true);
+          console.log("Sent")
           httpRequest.send(null);
         }
       </script>
