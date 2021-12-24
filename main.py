@@ -122,10 +122,11 @@ def do_action(act):
         else:
             res = ""
         for i in players:
+            res += "<p><b>"
             res += i
-            res += ": "
+            res += "</b>: "
             res += str(players[i])
-            res += "<br>"
+            res += "</p>"
         return res
     if act == "alert":
         alert.play()

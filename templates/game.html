@@ -18,37 +18,45 @@
         width: 100%;
         padding: 0;
         margin: 0;
+        background: linear-gradient(to bottom right, #0000ff, #8000ff, #ff00ff);
       }
       main {
-        background: #000080;
+        background: linear-gradient(to bottom right, #0000ff, #8000ff, #ff00ff);
         color: #fff;
         padding: 30px;
       }
       .inp {
-        display: inline-block;
-        color: #fff;
-        border: 5px solid #fff;
-        background: transparent;
-        border-radius: 4px;
-        padding: 10px 28px;
+        padding: 10px 5px;
+        border: 5px solid #000;
+        border-radius: 5px;
+        background: #fff;
+        color: #000;
+        font-size: 18px;
+        width: 100%;
         text-align: center;
+        background: transparent;
+      }
+      .inp:focus, .inp:hover {
+        outline: none;
+        border-color: #444;
       }
       button {
         display: inline-block;
-        color: #fff;
-        border: 5px solid #fff;
+        color: #000;
+        border: 5px solid #000000;
         background: transparent;
         border-radius: 4px;
         padding: 10px 28px;
         text-align: center;
         cursor: pointer;
+
       }
     </style>
   </head>
   <body>
     <main>
-      <div style="color: #ff0; padding: 0 0 0 30px;"><span style="font-size: 72px; color: #ff0;">&bull;</span><span id=coin style="color: #ff0;"></span></div>
-      <p>Введите код: <input type="text" id="inp" class="inp"><button onclick="checkCode();">ОК</button></p>
+      <div style="color: #000; text-align: center;">Монет на счету:<span id=coin style="color: #000; text-align: center;"></span></div>
+      <div style="color: #000; text-align: center;">Введите код:<input type="text" id="inp" class="inp"><div style="padding: 15px;">&nbsp;</div><button onclick="checkCode();">Подтвердить</button></div>
       <script>
         const ME = "{{ username }}";
         setInterval(function () {
@@ -74,7 +82,7 @@
               } else {
                 code.style.borderColor = "#f00";
               }
-              setTimeout(function() {code.style.borderColor = "#fff";}, 2000);
+              setTimeout(function() {code.style.borderColor = "#000";}, 2000);
             }
           }
           httpRequest.open('GET', '/api/check?uname=' + ME + '&code=' + code.value, true);
