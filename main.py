@@ -5,9 +5,9 @@ import sys
 app = Flask(__name__)
 app.secret_key = os.urandom(128)
 players = {
-    "@Roma": 0,
-    "@Rayan": 0,
-    "@Timur": 0
+    "@n1": 0,
+    "@n2": 0,
+    "@n3": 0
 }
 pg.init()
 player = pg.mixer.Channel(0)
@@ -49,7 +49,7 @@ alert = pg.mixer.Sound("alert.wav")
 @app.route("/admpass.html")
 def redir_admin():
     psw = request.args.get("psw")
-    if psw == "KarimChik":
+    if psw == "ADMINpass":
         session["adm"] = "True"
         return redirect("/")
     else:
